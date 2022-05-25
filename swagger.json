@@ -1,0 +1,1088 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "4.3.0",
+    "title": "Job's Portal",
+    "description": "You get best here",
+    "license": {
+      "name": "Sukhman",
+      "url": "https://epitometechnologies.org/"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": " Api for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Sign up",
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "description": "Insert User data",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created"
+          }
+        }
+      }
+    },
+
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Login",
+        "description": "login  in system",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "type": "object",
+            "description": "Login User ",
+            "schema": {
+              "$ref":"#/definitions/Login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged In"
+          }
+        }
+      }
+    },
+
+
+
+    "/user/forget_pass": {
+      "post": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Forget Password",
+        "description": "forget pass of User",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "type": "object",
+            "description": "Forget Pass",
+            "schema": {
+              "$ref":"#/definitions/Forget_password"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "token sent  Succesfully"
+          }
+        }
+      }
+    },
+
+
+    
+    "/user/reset_pass/{id}/{token}": {
+      "post": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Reset Password",
+        "description": "Reset pass of User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path", 
+            "description": "Insert Id "
+          },
+          {
+            "name": "token",
+            "in": "path", 
+            "description": "Insert token"
+          },
+          {
+            "name": "User",
+            "in": "body",
+            "type": "object",
+            "description": "Insert new Password ",
+            "schema" : {
+              "$ref":"#/definitions/Reset_password"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": { 
+            "description":"Password update Succesfully"
+          }
+        }
+      }
+    },
+
+
+
+    "/user/{id}": {
+      "get": {
+        "summary": "User data with given ID",
+        "tags": [
+          "Users API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "escription": "Users data"
+          }
+        }
+      },
+      "patch": {        
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to update",
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          }
+        ],
+        "summary": "User data with given ID",
+        "tags": [
+          "Users API"
+        ],
+        "responses": {
+          "200": {
+            "description": "User data"
+            
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "delete user data with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to delete",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User data"
+          }
+        }
+      }
+     },
+
+
+
+     "/user/job/joball": {
+      "get": {
+        "tags": [
+          "Users API"
+        ],
+        "summary": "Get all Jobs data",
+        "responses": {
+          "200": {
+            "description": "All Jobs data"
+          }
+        }
+      }
+    },
+
+
+    "/user/singlejob/{id}": {
+      "get": {
+        "summary": " Single Job  detail",
+        "tags": [
+          "Users API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of Job that we want to find",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "single Job data"
+          }
+        }
+      
+    }
+  },
+
+
+
+  "/user/job/org/{id}": {
+    "get": {
+      "summary": "All Jobs from one ORG",
+      "tags": [
+        "Users API"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of ORG to find All Jobs",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ORG Jobs"
+        }
+      }
+    
+  }
+},
+
+"/user/apply/user_id={id}/job_id={job_id}": {
+  "get": {
+    "tags": [
+      "Users API"
+    ],
+    "summary": "Applying Job",
+    "description": "Apply Job in ORG",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "description": " User Id"
+      }
+    ,
+      {  
+        "name": "job_id",
+        "in": "path",
+        "description": "Job Id"  
+      }
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Job Applied... successfully" 
+      }
+    }
+  }
+},
+
+
+"/user/updateEdu/User_id={id}/Edu_id={id2}": {
+  "patch": {
+    "tags": [
+      "Users API"
+    ],
+    "summary": "Update User Education",
+    "description": "Update User Education",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "description": " User Id"
+      }
+    ,
+      {  
+        "name": "id2",
+        "in": "path",
+        "description": "Education field Id"  
+      },
+      {  
+        "name": "in",
+        "in": "body",
+        "description": "Education field",
+        "schema": {
+          "$ref": "#/definitions/UpdateUserEdu"
+        }  
+      }
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "User Education Updated.. successfully" 
+      }
+    }
+  }
+},
+"/user/updateSkills/User_id={id}": {
+  "patch": {
+    "tags": [
+      "Users API"
+    ],
+    "summary": "Update User Skills",
+    "description": "Update User Skills",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "description": " User Id"
+      }
+    ,
+      {  
+        "name": "in",
+        "in": "body",
+        "description": "Skills field",
+        "schema": {
+          "$ref": "#/definitions/UpdateUserSkills"
+        }  
+      }
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "User Skills Updated.. successfully" 
+      }
+    }
+  }
+},
+
+
+
+
+
+
+
+"/user/aggregate/job_id={job_id}": {
+  "get": {
+    "tags": [
+      "Users API"
+    ],
+    "summary": "Get ORG details from  Job Id",
+    "description": "Get ORG details from  Job Id",
+    "parameters": [
+      {
+        "name": "job_id",
+        "in": "path",
+        "description": " Job Id"
+      }
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get ORG details from  Job Id " 
+      }
+    }
+  }
+},
+
+
+
+
+
+    
+      "/org/signup": {
+      "post": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Sign UP",
+        "description": "Sign new Org in system",
+        "parameters": [
+          {
+            "name": "Organization",
+            "in": "body",
+            "type": "object",
+            "description": "Insert Org data",
+            "schema": {
+              "$ref": "#/definitions/org"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Organization is created"
+          }
+        }
+      }
+    },
+      "/org/get": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Get all Organization",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "/org/delete": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Delete All Organization",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+
+    "/org/login": {
+      "post": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Login",
+        "description": "login  in system",
+        "parameters": [
+          {
+            "name": "Organization",
+            "in": "body",
+            "type": "object",
+            "description": "Login Organization ",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged In"
+          }
+        }
+      }
+    },
+
+    "/org/forget_pass": {
+      "post": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Forget Password",
+        "description": "forget pass   of ORG",
+        "parameters": [
+          {
+            "name": "Organization",
+            "in": "body",
+            "type": "object",
+            "description": "Forget Pass ",
+            "schema": {
+              "$ref": "#/definitions/Forget_password"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "token sent  Succesfully"
+          }
+        }
+      }
+    },
+
+    "/org/reset_pass/{id}/{token}": {
+      "post": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Reset Password",
+        "description": "Reset pass   of ORG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path", 
+            "description": "Insert Id "
+          },
+          {
+            "name": "token",
+            "in": "path", 
+            "description": "Insert token" 
+          },
+          {
+            "name": "Organization",
+            "in": "body",
+            "type": "object",
+            "description": "Insert new Password ",
+            "schema": {
+              "$ref": "#/definitions/Reset_password"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": { 
+            "description": "Password update Succesfully"
+          }
+        }
+      }
+    },
+
+    "/org/{id}": {
+      "get": {
+        "summary": "ORG with given ID",
+        "tags": [
+          "Organization API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of ORG that we want to find",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ORG detail"
+          }
+        }
+      
+    },
+    "patch": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of ORG that we want to update",
+          "type": "string"
+        },
+        {
+          "name": "ORG",
+          "in": "body",
+          "type": "object",
+          "schema":{
+            "$ref":"#/definitions/Update_org"
+          }
+        }
+      ],
+      "summary": "ORG data with given ID",
+      "tags": [
+        "Organization API"
+      ],
+      "responses": {
+        "200": {
+          "description": "ORG data"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "Organization API"
+      ],
+      "summary": "delete ORG data with given ID",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of ORG that we want to delete",
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ORG data"
+        }
+      }
+    }
+   },
+
+
+
+
+    "/org/createjob/org_id={id}": {
+      "post": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Create Job",
+        "description": "Create new Job in ORG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Insert ORG Id"
+          },
+          { 
+            "name": "Job",
+            "in": "body", 
+            "type": "object",
+            "description": "Insert Job data",
+            "schema":{
+              "$ref":"#/definitions/Create_Job"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Job is created" 
+          }
+        }
+      }
+    },
+    "/org/updatejob/{id}": {
+      "patch": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Update Job",
+        "description": "Update Job in ORG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Insert JOb Id"
+          },
+          { 
+            "name": "Job",
+            "in": "body", 
+            "type": "object",
+            "description": "Update Job data",
+            "schema":{
+              "$ref":"#/definitions/Create_Job"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Job is Updated" 
+          }
+        }
+      }
+    },
+
+
+    "/org/deljob/{id}": {
+      "delete": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Delete Job",
+        "description": "Delete Job in ORG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": " Insert Job Id"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Job is Deleted" 
+          }
+        }
+      }
+    },
+
+
+    "/org/Job/delete/Applicant/user_id={id}/job_id={job_id}": {
+      "delete": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Delete  Applicant from Job",
+        "description": "Delete Applicant from Job in ORG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": " Insert User Id"
+          },
+          {
+            "name": "job_id",
+            "in": "path",
+            "description": " Insert Job Id"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Applicant  is Deleted Succesfully" 
+          }
+        }
+      }
+    },
+
+
+
+    "/org/delAllJob": {
+      "delete": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Delete  Job",
+        "description": "Delete All Job in ORG",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": " All Job is Deleted Succesfully" 
+          }
+        }
+      }
+    },
+
+
+
+    "/org/Job/WithUsers": {
+      "get": {
+        "tags": [
+          "Organization API"
+        ],
+        "summary": "Get All Jobs with Applicants",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/org/Job/With/Applicant/{id}": {
+      "get": {
+        "summary": "Job with Applicant's",
+        "tags": [
+          "Organization API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of Job that we want to find",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users Job"
+          }
+        }
+      
+    }
+  }
+
+  },
+
+
+  "definitions": {
+    "User": {
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "ConfirmPassword": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "number"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Skills": {
+          "type": "object",
+          "properties":{
+            "Professional_Skills": {
+              "type": "array",
+          "items": {
+            "type": "string"
+          }
+            },
+            "Training_Intership": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Education": {
+          "type": "array",
+          "items": {
+          "type": "object",
+          "properties":{
+            "Tenth": {
+              "type": "string"
+            }
+          } 
+         }
+        },
+        "CurrentCompany": {
+          "type": "string"
+        }
+      }
+    },
+
+    "Login": {
+      "properties":{
+        "Email":{
+          "type": "string"
+        },
+        "Password":{
+          "type": "string"
+        }
+      }
+    },
+    "Forget_password": {
+      "properties":{
+        "Email":{
+          "type": "string"
+        }
+      }
+    },
+    "Reset_password": {
+      "properties":{
+        "Email":{
+          "type": "string"
+        },
+        "Password":{
+          "type": "string"
+        },
+        "ConfirmPassword":{
+          "type": "string"
+        }
+      }
+    },
+
+    "UpdateUser": {
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "number"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Skills": {
+          "type": "object",
+          "properties":{
+            "Professional_Skills": {
+              "type": "array",
+          "items": {
+            "type": "string"
+          }
+            },
+            "Training_Intership": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Education": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CurrentCompany": {
+          "type": "string"
+        }
+      }
+    },
+    
+    "UpdateUserEdu":{
+      "properties":{
+        "Education": {
+          "type": "array",
+          "items": {
+          "type": "object",
+          "properties":{
+            "Tenth": {
+              "type": "string"
+            }
+          } 
+         }
+        }
+      }
+    },
+    "UpdateUserSkills":{
+      "properties":{
+        "Skills": {
+          "type": "object",
+          "properties":{
+            "Professional_Skills": {
+              "type": "array",
+          "items": {
+            "type": "string"
+          }
+            },
+            "Training_Intership": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+
+
+
+     "org": {
+       "properties":{
+         "Name":{
+           "type": "string"
+         },
+         "Email":{
+           "type": "string"
+         },
+         "Password":{
+           "type": "string"
+         },
+         "Address":{
+           "type": "string"
+         },
+         "Phone":{
+           "type": "number"
+         },
+         "Country":{
+           "type": "string"
+         } 
+       }
+     } ,
+
+     "Update_org":{
+       "properties":{
+        "Name":{
+          "type": "string"
+        },
+        "Address":{
+          "type": "string"
+        },
+        "Phone":{
+          "type": "number"
+        },
+        "Country":{
+          "type": "string"
+        } 
+       }
+     },
+     
+     "Create_Job":{
+      "properties":{
+        "JobTitle":{
+          "type": "string"
+        },
+        "Description":{
+          "type": "string"
+        },
+        "RequiredSkills":{
+          "type": "array",
+          "items":{
+            "type": "string"
+          }
+        },
+        "Salary":{
+          "type": "string"
+        },
+        "Location":{
+          "type": "string"
+        } 
+       }
+     }
+  }
+  }
+
+        
+  
